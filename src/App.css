@@ -1,43 +1,51 @@
-/* App.css - Custom styles for digital clock effect with 1920x1200 as base scale */
+/* App.css - Custom styles for digital clock effect */
 
-/* Base margin value for reference - using tailwind mt-23 which is 92px */
-/* Reminder: In tailwind, mt-23 = 23 * 4px = 92px */
+/* Countdown panel styling based on Figma design */
+.countdown-panel {
+    background-color: rgba(0, 213, 250, 0.1);
+    border: 3px solid rgba(0, 212, 250, 0.61);
+    border-radius: 30px;
+    box-shadow: -1px 2px 50.2px -3px rgba(0, 212, 250, 0.562);
+    padding: 1rem;
+    width: 100%;
+    max-width: 1200px;
+    min-height: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
-/* Base text sizes and spacing for 1920x1200 resolution */
+/* Base text sizes and spacing */
 .title-text {
     font-size: 5rem;
-    /* Base size for 1920x1200 */
     font-weight: 600;
     letter-spacing: -0.05em;
     /* margin-bottom: 1rem; */
-    /* Reduced from 2rem to 1rem */
     font-style: italic;
     transform: skewX(-5deg);
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
     white-space: nowrap;
+    text-align: center;
 }
 
 .countdown-text {
     font-family: 'Orbitron', sans-serif;
     font-size: 7rem;
-    /* Base size for 1920x1200 */
     font-weight: bold;
     letter-spacing: -0.03em;
     /* margin-bottom: 1.5rem; */
-    /* Reduced from 3rem to 1.5rem */
     white-space: nowrap;
+    text-align: center;
 }
 
 .labels-container {
     display: flex;
     justify-content: space-between;
     width: 800px;
-    /* Base width for 1920x1200 */
 }
 
 .label-text {
     font-size: 3rem;
-    /* Base size for 1920x1200 */
     font-weight: bold;
     letter-spacing: -0.05em;
 }
@@ -66,4 +74,219 @@
 
 .blink-effect {
     animation: blink 1s infinite;
+}
+
+/* Loading animation */
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.animate-spin {
+    animation: spin 1s linear infinite;
+}
+
+/* Media queries for responsive layout */
+@media (max-width: 1366px) {
+    .countdown-panel {
+        padding: 1.5rem;
+        min-height: 320px;
+    }
+
+    .title-text {
+        font-size: 4.5rem;
+        margin-bottom: 0.8rem;
+    }
+
+    .countdown-text {
+        font-size: 6rem;
+        margin-bottom: 1.2rem;
+    }
+
+    .labels-container {
+        width: 700px;
+    }
+
+    .label-text {
+        font-size: 2.5rem;
+    }
+}
+
+@media (max-width: 1024px) {
+    .countdown-panel {
+        padding: 1.2rem;
+        min-height: 280px;
+        border-width: 2px;
+    }
+
+    .title-text {
+        font-size: 4rem;
+        margin-bottom: 0.6rem;
+    }
+
+    .countdown-text {
+        font-size: 5.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .labels-container {
+        width: 600px;
+    }
+
+    .label-text {
+        font-size: 2.2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .countdown-panel {
+        padding: 1rem;
+        border-width: 2px;
+        min-height: 240px;
+    }
+
+    .title-text {
+        font-size: 3.5rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .countdown-text {
+        font-size: 4.5rem;
+        margin-bottom: 0.8rem;
+    }
+
+    .labels-container {
+        width: 90%;
+    }
+
+    .label-text {
+        font-size: 1.8rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .countdown-panel {
+        padding: 0.8rem;
+        border-width: 1px;
+        min-height: 180px;
+        border-radius: 20px;
+    }
+
+    .title-text {
+        font-size: 1.8rem;
+        margin-bottom: 0.4rem;
+    }
+
+    .countdown-text {
+        font-size: 2.5rem;
+        margin-bottom: 0.6rem;
+    }
+
+    .labels-container {
+        width: 95%;
+    }
+
+    .label-text {
+        font-size: 1rem;
+    }
+}
+
+/* For smaller mobile devices like iPhone SE */
+@media (max-width: 430px) {
+    .countdown-panel {
+        padding: 0.5rem;
+        min-height: 160px;
+    }
+
+    .title-text {
+        font-size: 1.5rem;
+        margin-bottom: 0.3rem;
+    }
+
+    .countdown-text {
+        font-size: 2.2rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .labels-container {
+        width: 100%;
+    }
+
+    .label-text {
+        font-size: 0.9rem;
+    }
+}
+
+/* For extremely small devices */
+@media (max-width: 375px) {
+    .countdown-panel {
+        padding: 0.4rem;
+        min-height: 140px;
+    }
+
+    .title-text {
+        font-size: 1.3rem;
+        margin-bottom: 0.2rem;
+    }
+
+    .countdown-text {
+        font-size: 2rem;
+        margin-bottom: 0.4rem;
+    }
+
+    .label-text {
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 320px) {
+    .countdown-panel {
+        padding: 0.3rem;
+        min-height: 120px;
+    }
+
+    .title-text {
+        font-size: 1.1rem;
+        margin-bottom: 0.2rem;
+    }
+
+    .countdown-text {
+        font-size: 1.8rem;
+        margin-bottom: 0.3rem;
+    }
+
+    .label-text {
+        font-size: 0.7rem;
+    }
+}
+
+/* Handle landscape orientation on mobile */
+@media (max-height: 500px) and (orientation: landscape) {
+    .countdown-panel {
+        min-height: 180px;
+        padding: 0.5rem;
+    }
+
+    .title-text {
+        font-size: 2rem;
+        margin-bottom: 0.2rem;
+    }
+
+    .countdown-text {
+        font-size: 3rem;
+        margin-bottom: 0.3rem;
+    }
+
+    .labels-container {
+        width: 90%;
+    }
+
+    .label-text {
+        font-size: 1.2rem;
+    }
 }

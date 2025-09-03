@@ -1,6 +1,8 @@
 import { useState, useEffect, useRef } from 'react'
-import backgroundImg from './assets/images/clock-background.png'
+import backgroundImg from './assets/images/new/bg1.png'
+import logoImg from './assets/images/new/logo.png'
 import './App.css'
+import './assets/fonts/digital-font.css'
 
 function App() {
   const [time, setTime] = useState({
@@ -9,38 +11,62 @@ function App() {
     minutes: 0,
     seconds: 0
   })
-
-  // Base dimensions for scaling
-  const baseWidth = 1920;
-  const baseHeight = 1200;
-  const [scale, setScale] = useState(1);
+  const [imagesLoaded, setImagesLoaded] = useState(false);
+  const [orientation, setOrientation] = useState('portrait');
   const contentRef = useRef(null);
 
-  // Update scale based on viewport dimensions
+  // Handle image loading
+  useEffect(() => {
+    const images = [backgroundImg, logoImg];
+    let loadedCount = 0;
+
+    const imagePromises = images.map(src => {
+      return new Promise((resolve, reject) => {
+        const img = new Image();
+        img.src = src;
+        img.onload = () => {
+          loadedCount++;
+          if (loadedCount === images.length) {
+            setImagesLoaded(true);
+          }
+          resolve();
+        };
+        img.onerror = reject;
+      });
+    });
+
+    Promise.all(imagePromises).then(() => {
+      setImagesLoaded(true);
+    }).catch(err => {
+      console.error('Error loading images:', err);
+      // Still show content even if image loading fails
+      setImagesLoaded(true);
+    });
+  }, []);
+
+  // Update orientation based on viewport dimensions
   useEffect(() => {
     const handleResize = () => {
       const viewportWidth = window.innerWidth;
       const viewportHeight = window.innerHeight;
 
-      // Calculate scale factors for width and height
-      const widthScale = viewportWidth / baseWidth;
-      const heightScale = viewportHeight / baseHeight;
-
-      // Use the smaller scale factor to ensure content fits
-      const newScale = Math.min(widthScale, heightScale);
-
-      // Update scale state
-      setScale(newScale);
+      // Detect orientation
+      const newOrientation = viewportWidth > viewportHeight ? 'landscape' : 'portrait';
+      setOrientation(newOrientation);
     };
 
-    // Set initial scale
+    // Set initial values
     handleResize();
 
-    // Add event listener for window resize
+    // Add event listeners for window resize and orientation change
     window.addEventListener('resize', handleResize);
+    window.addEventListener('orientationchange', handleResize);
 
     // Clean up
-    return () => window.removeEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      window.removeEventListener('orientationchange', handleResize);
+    };
   }, []);
 
   useEffect(() => {
@@ -75,47 +101,72 @@ function App() {
     return num < 10 ? `0${num}` : num
   }
 
-  return (
-    <div className="relative w-full h-screen overflow-hidden font-[Inter] bg-black text-white">
-      {/* Background Image */}
-      <div className="absolute inset-0 z-0">
-        <img
-          src={backgroundImg}
-          alt="Clock Background"
-          className="w-full h-full object-center"
-        />
-      </div>
-
-      {/* Content */}
-      <div
-        ref={contentRef}
-        className="relative z-10 flex flex-col items-center justify-center h-full"
-        style={{
-          transform: `scale(${scale})`,
-          transformOrigin: 'center center',
-          gap: '0rem', // Gap between elements
-          marginTop: `${92 * scale}px` // Base margin of 92px (mt-23) that scales with screen size
-        }}
-      >
-        {/* Main Title */}
-        <h1 className="title-text">
-          PHỤNG SỰ & PHÁT TRIỂN
-        </h1>
-
-        {/* Countdown Numbers */}
-        <div className="countdown-text">
-          {formatNumber(time.days)} <span className="blink-effect">:</span> {formatNumber(time.hours)} <span className="blink-effect">:</span> {formatNumber(time.minutes)} <span className="blink-effect">:</span> {formatNumber(time.seconds)}
-        </div>
-
-        {/* Labels */}
-        <div className="labels-container">
-          <div className="label-text">NGÀY</div>
-          <div className="label-text">GIỜ</div>
-          <div className="label-text">PHÚT</div>
-          <div className="label-text">GIÂY</div>
-        </div>
+  // Loading indicator component
+  const LoadingIndicator = () => (
+    <div className="fixed inset-0 flex items-center justify-center bg-black z-50">
+      <div className="text-center">
+        <div className="inline-block animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-cyan-400 mb-4"></div>
+        <p className="text-cyan-400 text-lg">Đang tải...</p>
       </div>
     </div>
+  )
+
+  return (
+    <>
+      {!imagesLoaded && <LoadingIndicator />}
+
+      <div className="relative w-full h-screen overflow-hidden font-[Inter] bg-black text-white">
+        {/* Background Image */}
+        <div className="absolute inset-0 z-0">
+          <img
+            src={backgroundImg}
+            alt="Clock Background"
+            className="w-full h-full object-cover object-center"
+          />
+        </div>
+
+        {/* Content Container */}
+        <div className="relative w-full h-full flex flex-col items-center justify-center z-10 p-4 md:p-8">
+          <div className={`w-full max-w-[1200px] mx-auto ${orientation === 'landscape' ? 'flex flex-col items-center' : ''}`}>
+            {/* Logo */}
+            <div className={`flex justify-center ${orientation === 'portrait' ? 'mb-6 md:mb-10' : 'mr-6 md:mr-10 flex-shrink-0'}`}>
+              <img
+                src={logoImg}
+                alt="Logo"
+                className={`w-auto h-auto ${orientation === 'portrait' ? 'max-h-[450px] md:max-h-[600px]' : 'max-h-[250px] md:max-h-[400px]'}`}
+              />
+            </div>
+
+            {/* Content Panel */}
+            <div className={`countdown-panel ${orientation === 'landscape' && 'flex-grow'}`}>
+              {/* Countdown Content */}
+              <div
+                ref={contentRef}
+                className="relative flex flex-col items-center justify-center p-2 md:p-4"
+              >
+                {/* Main Title */}
+                <h1 className="title-text">
+                  PHỤNG SỰ & PHÁT TRIỂN
+                </h1>
+
+                {/* Countdown Numbers */}
+                <div className="countdown-text">
+                  {formatNumber(time.days)} <span className="blink-effect">:</span> {formatNumber(time.hours)} <span className="blink-effect">:</span> {formatNumber(time.minutes)} <span className="blink-effect">:</span> {formatNumber(time.seconds)}
+                </div>
+
+                {/* Labels */}
+                <div className="labels-container">
+                  <div className="label-text">NGÀY</div>
+                  <div className="label-text">GIỜ</div>
+                  <div className="label-text">PHÚT</div>
+                  <div className="label-text">GIÂY</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
   )
 }
 
