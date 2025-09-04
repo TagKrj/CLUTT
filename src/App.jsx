@@ -115,7 +115,7 @@ function App() {
     <>
       {!imagesLoaded && <LoadingIndicator />}
 
-      <div className="relative w-full h-screen overflow-hidden font-[Inter] bg-black text-white">
+      <div className="relative w-full h-screen overflow-hidden font-[Montserrat] bg-black text-white">
         {/* Background Image */}
         <div className="absolute inset-0 z-0">
           <img
@@ -127,13 +127,13 @@ function App() {
 
         {/* Content Container */}
         <div className="relative w-full h-full flex flex-col items-center justify-center z-10 p-4 md:p-8">
-          <div className={`w-full max-w-[1200px] mx-auto ${orientation === 'landscape' ? 'flex flex-col items-center' : ''}`}>
+          <div className={`w-full max-w-[1020px] mx-auto ${orientation === 'landscape' ? 'flex flex-col items-center' : ''}`}>
             {/* Logo */}
             <div className={`flex justify-center ${orientation === 'portrait' ? 'mb-6 md:mb-10' : 'mr-6 md:mr-10 flex-shrink-0'}`}>
               <img
                 src={logoImg}
                 alt="Logo"
-                className={`w-auto h-auto ${orientation === 'portrait' ? 'max-h-[450px] md:max-h-[600px]' : 'max-h-[250px] md:max-h-[400px]'}`}
+                className={`w-auto h-auto ${orientation === 'portrait' ? 'max-h-[380px] md:max-h-[510px]' : 'max-h-[210px] md:max-h-[340px]'}`}
               />
             </div>
 
@@ -162,6 +162,13 @@ function App() {
                   <div className="label-text">GIÂY</div>
                 </div>
               </div>
+            </div>
+
+            <div className="mt-6 md:mt-10 text-center">
+              <h2 className="flex flex-col space-y-1 md:space-y-2 gradient-border pt-2 md:pt-4">
+                <span className="anniversary-text  text-[#f3a734]">HƯỚNG TỚI KỶ NIỆM 80 NĂM NGÀY THÀNH LẬP TRƯỜNG</span>
+                <span className="anniversary-date-text text-[#f3a734]">(15/11/1945-15/11/2025)</span>
+              </h2>
             </div>
           </div>
         </div>

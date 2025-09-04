@@ -3,13 +3,13 @@
 /* Countdown panel styling based on Figma design */
 .countdown-panel {
     background-color: rgba(0, 213, 250, 0.1);
-    border: 3px solid rgba(0, 212, 250, 0.61);
-    border-radius: 30px;
-    box-shadow: -1px 2px 50.2px -3px rgba(0, 212, 250, 0.562);
-    padding: 1rem;
+    /* border: 3px solid rgba(0, 212, 250, 0.61); */
+    border-radius: 25px;
+    box-shadow: -1px 2px 45px -3px rgba(0, 212, 250, 0.562);
+    /* padding: 1rem; */
     width: 100%;
-    max-width: 1200px;
-    min-height: 400px;
+    max-width: 1020px;
+    min-height: 340px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -17,8 +17,9 @@
 
 /* Base text sizes and spacing */
 .title-text {
-    font-size: 5rem;
-    font-weight: 600;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 4.25rem;
+    font-weight: 700;
     letter-spacing: -0.05em;
     /* margin-bottom: 1rem; */
     font-style: italic;
@@ -30,7 +31,7 @@
 
 .countdown-text {
     font-family: 'Orbitron', sans-serif;
-    font-size: 7rem;
+    font-size: 5.95rem;
     font-weight: bold;
     letter-spacing: -0.03em;
     /* margin-bottom: 1.5rem; */
@@ -41,13 +42,73 @@
 .labels-container {
     display: flex;
     justify-content: space-between;
-    width: 800px;
+    width: 680px;
 }
 
 .label-text {
-    font-size: 3rem;
-    font-weight: bold;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2.55rem;
+    font-weight: 700;
     letter-spacing: -0.05em;
+    color: #ffffffb6;
+}
+
+/* Anniversary text styling - same as label-text but for anniversary section */
+.anniversary-text {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    letter-spacing: -0.05em;
+}
+
+/* Styling for the date text with increased letter spacing */
+.anniversary-date-text {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+}
+
+/* Gradient border effect for anniversary section */
+.gradient-border {
+    position: relative;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    background-clip: padding-box;
+}
+
+.gradient-border::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -20%;
+    right: -20%;
+    height: 2px;
+    background: linear-gradient(to right,
+            rgba(243, 167, 52, 0) 0%,
+            rgba(243, 167, 52, 0) 10%,
+            rgba(255, 215, 0, 0.6) 30%,
+            rgba(255, 215, 0, 1) 50%,
+            rgba(255, 215, 0, 0.6) 70%,
+            rgba(243, 167, 52, 0) 90%,
+            rgba(243, 167, 52, 0) 100%);
+}
+
+.gradient-border::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(to right,
+            rgba(243, 167, 52, 0) 0%,
+            rgba(243, 167, 52, 0) 10%,
+            rgba(255, 215, 0, 0.6) 30%,
+            rgba(255, 215, 0, 1) 50%,
+            rgba(255, 215, 0, 0.6) 70%,
+            rgba(243, 167, 52, 0) 90%,
+            rgba(243, 167, 52, 0) 100%);
 }
 
 /* Digital clock glow effect */
@@ -94,70 +155,116 @@
 /* Media queries for responsive layout */
 @media (max-width: 1366px) {
     .countdown-panel {
-        padding: 1.5rem;
-        min-height: 320px;
+        padding: 1.3rem;
+        min-height: 272px;
+    }
+
+    .gradient-border::before {
+        left: -15%;
+        right: -15%;
+        height: 2px;
+    }
+
+    .gradient-border::after {
+        height: 2px;
     }
 
     .title-text {
-        font-size: 4.5rem;
-        margin-bottom: 0.8rem;
+        font-size: 3.8rem;
+        margin-bottom: 0.7rem;
     }
 
     .countdown-text {
-        font-size: 6rem;
-        margin-bottom: 1.2rem;
+        font-size: 5.1rem;
+        margin-bottom: 1rem;
     }
 
     .labels-container {
-        width: 700px;
+        width: 595px;
     }
 
     .label-text {
-        font-size: 2.5rem;
+        font-size: 2.1rem;
+    }
+
+    .anniversary-text {
+        font-size: 1.8rem;
+    }
+
+    .anniversary-date-text {
+        font-size: 1.8rem;
     }
 }
 
 @media (max-width: 1024px) {
     .countdown-panel {
-        padding: 1.2rem;
-        min-height: 280px;
+        padding: 1rem;
+        min-height: 238px;
         border-width: 2px;
     }
 
+    .gradient-border::before {
+        left: -12%;
+        right: -12%;
+        height: 1.5px;
+    }
+
+    .gradient-border::after {
+        height: 1.5px;
+    }
+
     .title-text {
-        font-size: 4rem;
-        margin-bottom: 0.6rem;
+        font-size: 3.4rem;
+        margin-bottom: 0.5rem;
     }
 
     .countdown-text {
-        font-size: 5.5rem;
-        margin-bottom: 1rem;
+        font-size: 4.7rem;
+        margin-bottom: 0.85rem;
     }
 
     .labels-container {
-        width: 600px;
+        width: 510px;
     }
 
     .label-text {
-        font-size: 2.2rem;
+        font-size: 1.85rem;
+    }
+
+    .anniversary-text {
+        font-size: 1.6rem;
+    }
+
+    .anniversary-date-text {
+        font-size: 1.6rem;
     }
 }
 
 @media (max-width: 768px) {
     .countdown-panel {
-        padding: 1rem;
+        padding: 0.85rem;
         border-width: 2px;
-        min-height: 240px;
+        min-height: 204px;
+    }
+
+    .gradient-border::before {
+        left: -8%;
+        right: -8%;
+        height: 1.5px;
+    }
+
+    .gradient-border::after {
+        height: 1.5px;
     }
 
     .title-text {
-        font-size: 3.5rem;
-        margin-bottom: 0.5rem;
+        font-size: 3rem;
+        margin-bottom: 0.4rem;
     }
 
     .countdown-text {
-        font-size: 4.5rem;
-        margin-bottom: 0.8rem;
+        font-size: 3.8rem;
+        margin-bottom: 0.7rem;
     }
 
     .labels-container {
@@ -165,26 +272,44 @@
     }
 
     .label-text {
-        font-size: 1.8rem;
+        font-size: 1.5rem;
+    }
+
+    .anniversary-text {
+        font-size: 1.3rem;
+    }
+
+    .anniversary-date-text {
+        font-size: 1.3rem;
     }
 }
 
 @media (max-width: 480px) {
     .countdown-panel {
-        padding: 0.8rem;
+        padding: 0.7rem;
         border-width: 1px;
-        min-height: 180px;
-        border-radius: 20px;
+        min-height: 153px;
+        border-radius: 17px;
+    }
+
+    .gradient-border::before {
+        left: -5%;
+        right: -5%;
+        height: 1px;
+    }
+
+    .gradient-border::after {
+        height: 1px;
     }
 
     .title-text {
-        font-size: 1.8rem;
-        margin-bottom: 0.4rem;
+        font-size: 1.5rem;
+        margin-bottom: 0.35rem;
     }
 
     .countdown-text {
-        font-size: 2.5rem;
-        margin-bottom: 0.6rem;
+        font-size: 2.1rem;
+        margin-bottom: 0.5rem;
     }
 
     .labels-container {
@@ -192,25 +317,43 @@
     }
 
     .label-text {
-        font-size: 1rem;
+        font-size: 0.85rem;
+    }
+
+    .anniversary-text {
+        font-size: 0.73rem;
+    }
+
+    .anniversary-date-text {
+        font-size: 0.73rem;
     }
 }
 
 /* For smaller mobile devices like iPhone SE */
 @media (max-width: 430px) {
     .countdown-panel {
-        padding: 0.5rem;
-        min-height: 160px;
+        padding: 0.4rem;
+        min-height: 136px;
+    }
+
+    .gradient-border::before {
+        left: -3%;
+        right: -3%;
+        height: 1px;
+    }
+
+    .gradient-border::after {
+        height: 1px;
     }
 
     .title-text {
-        font-size: 1.5rem;
-        margin-bottom: 0.3rem;
+        font-size: 1.3rem;
+        margin-bottom: 0.25rem;
     }
 
     .countdown-text {
-        font-size: 2.2rem;
-        margin-bottom: 0.5rem;
+        font-size: 1.9rem;
+        margin-bottom: 0.45rem;
     }
 
     .labels-container {
@@ -218,68 +361,92 @@
     }
 
     .label-text {
-        font-size: 0.9rem;
+        font-size: 0.77rem;
+    }
+
+    .anniversary-text {
+        font-size: 0.66rem;
+    }
+
+    .anniversary-date-text {
+        font-size: 0.66rem;
     }
 }
 
 /* For extremely small devices */
 @media (max-width: 375px) {
     .countdown-panel {
-        padding: 0.4rem;
-        min-height: 140px;
+        padding: 0.35rem;
+        min-height: 119px;
     }
 
     .title-text {
-        font-size: 1.3rem;
-        margin-bottom: 0.2rem;
+        font-size: 1.1rem;
+        margin-bottom: 0.17rem;
     }
 
     .countdown-text {
-        font-size: 2rem;
-        margin-bottom: 0.4rem;
+        font-size: 1.7rem;
+        margin-bottom: 0.35rem;
     }
 
     .label-text {
-        font-size: 0.8rem;
+        font-size: 0.68rem;
+    }
+
+    .anniversary-text {
+        font-size: 0.58rem;
+    }
+
+    .anniversary-date-text {
+        font-size: 0.58rem;
     }
 }
 
 @media (max-width: 320px) {
     .countdown-panel {
-        padding: 0.3rem;
-        min-height: 120px;
+        padding: 0.25rem;
+        min-height: 102px;
     }
 
     .title-text {
-        font-size: 1.1rem;
-        margin-bottom: 0.2rem;
+        font-size: 0.95rem;
+        margin-bottom: 0.17rem;
     }
 
     .countdown-text {
-        font-size: 1.8rem;
-        margin-bottom: 0.3rem;
+        font-size: 1.5rem;
+        margin-bottom: 0.25rem;
     }
 
     .label-text {
-        font-size: 0.7rem;
+        font-size: 0.6rem;
+    }
+
+    .anniversary-text {
+        font-size: 0.51rem;
+    }
+
+    .anniversary-date-text {
+        font-size: 0.51rem;
     }
 }
 
 /* Handle landscape orientation on mobile */
 @media (max-height: 500px) and (orientation: landscape) {
     .countdown-panel {
-        min-height: 180px;
-        padding: 0.5rem;
+        min-height: 153px;
+        padding: 0.4rem;
     }
 
     .title-text {
-        font-size: 2rem;
-        margin-bottom: 0.2rem;
+        font-size: 1.7rem;
+        margin-bottom: 0.17rem;
     }
 
     .countdown-text {
-        font-size: 3rem;
-        margin-bottom: 0.3rem;
+        font-size: 2.55rem;
+        margin-bottom: 0.25rem;
     }
 
     .labels-container {
@@ -287,6 +454,6 @@
     }
 
     .label-text {
-        font-size: 1.2rem;
+        font-size: 1rem;
     }
 }
