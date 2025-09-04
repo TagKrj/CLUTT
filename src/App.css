@@ -4,6 +4,7 @@
 .countdown-panel {
     background-color: rgba(0, 213, 250, 0.1);
     /* border: 3px solid rgba(0, 212, 250, 0.61); */
+    /* Border already commented out */
     border-radius: 25px;
     box-shadow: -1px 2px 45px -3px rgba(0, 212, 250, 0.562);
     /* padding: 1rem; */
@@ -13,6 +14,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    border: none;
+    /* Explicitly set border to none */
 }
 
 /* Base text sizes and spacing */
@@ -157,6 +160,7 @@
     .countdown-panel {
         padding: 1.3rem;
         min-height: 272px;
+        border: none;
     }
 
     .gradient-border::before {
@@ -200,7 +204,9 @@
     .countdown-panel {
         padding: 1rem;
         min-height: 238px;
-        border-width: 2px;
+        /* border-width: 2px; */
+        /* Removed border */
+        border: none;
     }
 
     .gradient-border::before {
@@ -243,8 +249,10 @@
 @media (max-width: 768px) {
     .countdown-panel {
         padding: 0.85rem;
-        border-width: 2px;
+        /* border-width: 2px; */
+        /* Removed border */
         min-height: 204px;
+        border: none;
     }
 
     .gradient-border::before {
@@ -287,9 +295,11 @@
 @media (max-width: 480px) {
     .countdown-panel {
         padding: 0.7rem;
-        border-width: 1px;
+        /* border-width: 1px; */
+        /* Removed border */
         min-height: 153px;
         border-radius: 17px;
+        border: none;
     }
 
     .gradient-border::before {
@@ -334,6 +344,7 @@
     .countdown-panel {
         padding: 0.4rem;
         min-height: 136px;
+        border: none;
     }
 
     .gradient-border::before {
@@ -378,6 +389,7 @@
     .countdown-panel {
         padding: 0.35rem;
         min-height: 119px;
+        border: none;
     }
 
     .title-text {
@@ -407,6 +419,7 @@
     .countdown-panel {
         padding: 0.25rem;
         min-height: 102px;
+        border: none;
     }
 
     .title-text {
@@ -437,6 +450,7 @@
     .countdown-panel {
         min-height: 153px;
         padding: 0.4rem;
+        border: none;
     }
 
     .title-text {
