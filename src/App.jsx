@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
-import backgroundImg from './assets/images/new/bg1.png'
+import backgroundImg from './assets/images/new/bg4.png'
 import logoImg from './assets/images/new/logo.png'
 import './App.css'
 import './assets/fonts/digital-font.css'
@@ -14,6 +14,7 @@ function App() {
   const [imagesLoaded, setImagesLoaded] = useState(false);
   const [orientation, setOrientation] = useState('portrait');
   const contentRef = useRef(null);
+  const [currentDate, setCurrentDate] = useState(new Date());
 
   // Handle image loading
   useEffect(() => {
@@ -74,8 +75,8 @@ function App() {
     const targetDate = new Date('2025-11-15T00:00:00')
 
     const updateCountdown = () => {
-      const currentDate = new Date()
-      const timeDifference = targetDate - currentDate
+      const now = new Date()
+      const timeDifference = targetDate - now
 
       // Calculate days, hours, minutes, seconds
       const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24))
@@ -96,9 +97,33 @@ function App() {
     return () => clearInterval(intervalId)
   }, [])
 
+  // Separate effect for real-time clock updates
+  useEffect(() => {
+    const updateCurrentTime = () => {
+      setCurrentDate(new Date())
+    }
+
+    // Update the current time immediately
+    updateCurrentTime()
+
+    // Update the current time every second
+    const intervalId = setInterval(updateCurrentTime, 1000)
+
+    // Clean up the interval when the component unmounts
+    return () => clearInterval(intervalId)
+  }, [])
+
   // Format numbers to have two digits
   const formatNumber = (num) => {
     return num < 10 ? `0${num}` : num
+  }
+
+  // Format date as DD/MM/YYYY
+  const formatDate = (date) => {
+    const day = formatNumber(date.getDate());
+    const month = formatNumber(date.getMonth() + 1);
+    const year = date.getFullYear();
+    return `${day}/${month}/${year}`;
   }
 
   // Loading indicator component
@@ -168,6 +193,12 @@ function App() {
               <h2 className="flex flex-col space-y-1 md:space-y-2 gradient-border pt-2 md:pt-4">
                 <span className="anniversary-text  text-[#f3a734]">HƯỚNG TỚI KỶ NIỆM 80 NĂM NGÀY THÀNH LẬP TRƯỜNG</span>
                 <span className="anniversary-date-text text-[#f3a734]">(15/11/1945-15/11/2025)</span>
+              </h2>
+            </div>
+            <div className="mt-1 md:mt-7 text-center">
+              <h2 className="space-y-1 md:space-y-2 pt-2 md:pt-0">
+                <span className="current-time-text text-[#ffffff] text-2xl md:text-3xl font-bold">BÂY GIỜ LÀ: </span>
+                <span className="current-time-date-text text-[#a4ffff] text-3xl md:text-4xl lg:text-5xl font-bold">{formatNumber(currentDate.getHours())}:{formatNumber(currentDate.getMinutes())}:{formatNumber(currentDate.getSeconds())}-{formatDate(currentDate)}</span>
               </h2>
             </div>
           </div>
